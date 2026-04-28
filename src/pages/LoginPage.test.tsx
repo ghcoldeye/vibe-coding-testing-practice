@@ -61,7 +61,7 @@ describe('LoginPage', () => {
             expect(mockLogin).not.toHaveBeenCalled();
         });
 
-        it('密碼長度不足 8 碼時顯示錯誤訊息  safdsdfsadf ', async () => {
+        it('密碼長度不足 8 碼時顯示錯誤訊息 ', async () => {
             const user = userEvent.setup();
             render(<LoginPage /
             
