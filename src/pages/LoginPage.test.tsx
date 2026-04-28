@@ -35,7 +35,7 @@ describe('LoginPage', () => {
     describe('前端元素', () => {
         it('渲染歡迎標題與文字', () => {
             render(<LoginPage />);
-            
+
             expect(screen.getByText('歡迎回來')).toBeInTheDocument();
             expect(screen.getByText('請登入以繼續')).toBeInTheDocument();
             expect(screen.getByLabelText('電子郵件')).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe('LoginPage', () => {
         it('Email 格式錯誤時顯示錯誤訊息', async () => {
             const user = userEvent.setup();
             render(<LoginPage />);
-            
+
             const emailInput = screen.getByLabelText('電子郵件');
             const passwordInput = screen.getByLabelText('密碼');
             const loginButton = screen.getByRole('button', { name: '登入' });
@@ -61,9 +61,9 @@ describe('LoginPage', () => {
             expect(mockLogin).not.toHaveBeenCalled();
         });
 
-        it('密碼長度不足 8 碼時顯示錯誤訊息', async () => {
+        it('密碼長度不足 8 碼時顯示錯誤訊息  safdsdfsadf ', async () => {
             const user = userEvent.setup();
-            render(<LoginPage />);
+            render(<LoginPage /
             
             const emailInput = screen.getByLabelText('電子郵件');
             const passwordInput = screen.getByLabelText('密碼');
@@ -80,7 +80,7 @@ describe('LoginPage', () => {
         it('密碼缺少英數混合時顯示錯誤訊息', async () => {
             const user = userEvent.setup();
             render(<LoginPage />);
-            
+
             const emailInput = screen.getByLabelText('電子郵件');
             const passwordInput = screen.getByLabelText('密碼');
             const loginButton = screen.getByRole('button', { name: '登入' });
@@ -99,23 +99,23 @@ describe('LoginPage', () => {
             const user = userEvent.setup();
             mockLogin.mockImplementation(() => new Promise(resolve => setTimeout(resolve, 100)));
             render(<LoginPage />);
-            
+
             const emailInput = screen.getByLabelText('電子郵件');
             const passwordInput = screen.getByLabelText('密碼');
             const loginButton = screen.getByRole('button', { name: '登入' });
 
             await user.type(emailInput, 'test@example.com');
             await user.type(passwordInput, 'Valid1234');
-            
+
             const clickPromise = user.click(loginButton);
-            
+
             expect(await screen.findByText('登入中...')).toBeInTheDocument();
             expect(loginButton).toBeDisabled();
             expect(emailInput).toBeDisabled();
             expect(passwordInput).toBeDisabled();
-            
+
             await clickPromise;
-            
+
             await waitFor(() => {
                 expect(mockNavigate).toHaveBeenCalledWith('/dashboard', { replace: true });
             });
@@ -127,7 +127,7 @@ describe('LoginPage', () => {
                 response: { data: { message: '帳號或密碼錯誤' } }
             });
             render(<LoginPage />);
-            
+
             const emailInput = screen.getByLabelText('電子郵件');
             const passwordInput = screen.getByLabelText('密碼');
             const loginButton = screen.getByRole('button', { name: '登入' });
@@ -150,9 +150,9 @@ describe('LoginPage', () => {
                 authExpiredMessage: '',
                 clearAuthExpiredMessage: mockClearAuthExpiredMessage,
             });
-            
+
             render(<LoginPage />);
-            
+
             expect(mockNavigate).toHaveBeenCalledWith('/dashboard', { replace: true });
         });
 
@@ -163,9 +163,9 @@ describe('LoginPage', () => {
                 authExpiredMessage: '登入狀態已過期',
                 clearAuthExpiredMessage: mockClearAuthExpiredMessage,
             });
-            
+
             render(<LoginPage />);
-            
+
             expect(screen.getByText('登入狀態已過期')).toBeInTheDocument();
             expect(mockClearAuthExpiredMessage).toHaveBeenCalled();
         });
