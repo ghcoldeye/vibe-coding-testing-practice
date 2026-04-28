@@ -61,10 +61,10 @@ describe('LoginPage', () => {
             expect(mockLogin).not.toHaveBeenCalled();
         });
 
-        it('密碼長度不足 8 碼時顯示錯誤訊息 ', async () => {
+        it('密碼長度不足 8 碼時顯示錯誤訊息', async () => {
             const user = userEvent.setup();
-            render(<LoginPage /
-            
+            render(<LoginPage />);
+
             const emailInput = screen.getByLabelText('電子郵件');
             const passwordInput = screen.getByLabelText('密碼');
             const loginButton = screen.getByRole('button', { name: '登入' });
